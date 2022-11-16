@@ -6,7 +6,11 @@ public class Aim : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private GameObject aim;
-    static private string asteroidTag = "Asteroid1";
+    static private string asteroid1Tag = "Asteroid1";
+    static private string asteroid2Tag = "Asteroid2";
+    static private string spaceshipTag = "Spaceship";
+    private int score = 0;
+    
     void Start()
     {
         Cursor.visible = false;
@@ -15,10 +19,25 @@ public class Aim : MonoBehaviour
     void TryToDestroy(Vector3 position)
     {
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(position.x, position.y), Vector2.zero);
-        if ((hit.collider != null) && hit.collider.CompareTag(asteroidTag))
+        if ((hit.collider != null) && hit.collider.CompareTag(asteroid1Tag))
         {
-            UI.asteroides1.Remove(hit.collider.gameObject.transform.parent.gameObject);
+            ObjectSpawn.asteroides1.Remove(hit.collider.gameObject.transform.parent.gameObject);
             Destroy(hit.collider.gameObject.transform.parent.gameObject);
+            score += 1;
+            UI.UpdatePoints(score);
+        }
+        if ((hit.collider != null) && hit.collider.CompareTag(asteroid2Tag))
+        {
+            ObjectSpawn.asteroides2.Remove(hit.collider.gameObject.transform.parent.gameObject);
+            Destroy(hit.collider.gameObject.transform.parent.gameObject);
+            score += 2;
+            UI.UpdatePoints(score);
+        }
+        if ((hit.collider != null) && hit.collider.CompareTag(spaceshipTag))
+        {
+            ObjectSpawn.spaceships.Remove(hit.collider.gameObject.transform.parent.gameObject);
+            Destroy(hit.collider.gameObject.transform.parent.gameObject);
+            UI.DestroyHealth();
         }
     }
 

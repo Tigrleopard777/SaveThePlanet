@@ -7,6 +7,8 @@ TagManager:
   - Projectile
   - Background
   - Asteroid1
+  - Asteroid2
+  - Spaceship
   layers:
   - Default
   - TransparentFX
@@ -43,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2691854897
+    locked: 0
+  - name: Panel
+    uniqueID: 4237630073
     locked: 0
